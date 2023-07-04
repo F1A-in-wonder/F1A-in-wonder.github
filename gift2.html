@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>生日快乐</title>
+    <style>
+        /* 礼物容器样式 */
+        .gift-container {
+            width: 200px;
+            height: 200px;
+            background-color: #ffcc00;
+            border: 2px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* 礼物盒子样式 */
+        .gift-box {
+            width: 100px;
+            height: 100px;
+            background-color: #ffffff;
+            border: 2px solid #000;
+            position: relative;
+        }
+
+        /* 礼物丝带样式 */
+        .ribbon {
+            width: 80px;
+            height: 20px;
+            background-color: #ff0000;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- 网页头部 -->
+    </header>
+    <nav>
+        <!-- 导航栏 -->
+    </nav>
+    <main>
+        <!-- 内容区域 -->
+        <div class="gift-container" onclick="showGift()">
+            <div class="gift-box">
+                <div class="ribbon"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- 网页底部 -->
+    </footer>
+    <script>
+        // 显示礼物
+        function showGift() {
+            var currentDate = new Date();
+            var targetDate = new Date('2023-10-22');
+
+            if (currentDate < targetDate) {
+                alert('还没到时间哦');
+                return;
+            }
+
+            var giftContainer = document.querySelector('.gift-container');
+            var giftBox = document.querySelector('.gift-box');
+            var ribbon = document.querySelector('.ribbon');
+
+            giftContainer.style.display = 'none';
+            giftBox.style.display = 'block';
+
+            var scrollingTextContainer = document.createElement('div');
+            scrollingTextContainer.style.position = 'absolute';
+
+            for (var i = 0; i < 20; i++) {
+                var scrollingText = document.createElement('marquee');
+                scrollingText.textContent = '生日快乐';
+                scrollingText.style.color = getRandomColor();
+                scrollingText.style.fontSize = '30px';
+                scrollingText.style.whiteSpace = 'nowrap';
+                scrollingText.style.top = getRandomPosition();
+                scrollingText.style.left = getRandomPosition();
+                scrollingText.style.animationDuration = getRandomSpeed();
+
+                scrollingTextContainer.appendChild(scrollingText);
+            }
+
+            document.body.appendChild(scrollingTextContainer);
+        }
+
+        // 生成随机颜色
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // 生成随机位置
+        function getRandomPosition() {
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
+            var posX = Math.floor(Math.random() * (windowWidth - 100));
+            var posY = Math.floor(Math.random() * (windowHeight - 100));
+            return posY + 'px';
+        }
+
+        // 生成随机速度
+        function getRandomSpeed() {
+            var minSpeed = 5;
+            var maxSpeed = 20;
+            var speed = Math.floor(Math.random() * (maxSpeed - minSpeed) + minSpeed);
+            return speed + 's';
+        }
+    </script>
+</body>
+</html>
